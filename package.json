@@ -5,11 +5,23 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "mock-server": "json-server -w db.json -p 3001 -d 1000",
+    "api-test": "concurrently \"npm run dev\" \"npm run mock-server\"",
+    "flow": "flow status"
   },
   "dependencies": {
     "next": "10.0.3",
+    "prettier": "^2.2.1",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "sass": "^1.29.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-flow": "^7.12.1",
+    "concurrently": "^5.3.0",
+    "flow-bin": "^0.141.0"
   }
 }
