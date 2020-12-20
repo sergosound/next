@@ -12,9 +12,11 @@
 module.name_mapper='^next\/\(.*\)$' -> '<PROJECT_ROOT>/node_modules\1'
 module.name_mapper='^@hooks\/\(.*\)$' -> '<PROJECT_ROOT>/client/hooks\1'
 module.name_mapper='^@components\/\(.*\)$' -> '<PROJECT_ROOT>/client/components\1'
+module.name_mapper='^@ui\/\(.*\)$' -> '<PROJECT_ROOT>/client/ui\1'
 # come to a single regex pattern
 module.name_mapper='@next' -> '<PROJECT_ROOT>/node_modules/next'
 module.name_mapper='@hooks' -> '<PROJECT_ROOT>/client/hooks'
 module.name_mapper='@components' -> '<PROJECT_ROOT>/client/components'
+module.name_mapper='@ui' -> '<PROJECT_ROOT>/client/ui'
 
 [strict]

@@ -1,10 +1,11 @@
+import React from "react";
 import Link from "next/link";
-import Index from "@components/App";
+import App from "@components/App";
 import Head from "next/head";
 
 export default function Index() {
   return (
-    <Index>
+    <App>
       <Head>
         <title>Title</title>
         <meta charSet="UTF-8" />
@@ -14,6 +15,6 @@ export default function Index() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <h1>Index Page</h1>
-    </Index>
+    </App>
   );
 }

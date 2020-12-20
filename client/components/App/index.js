@@ -1,9 +1,9 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import Link from "next/link";
 
-export default function Index({ children }) {
+export default function App({ children }) {
   return (
-    <Fragment>
+    <>
       <nav>
         <Link href="/">
           <a>Home</a>
@@ -16,7 +16,7 @@ export default function Index({ children }) {
         </Link>
       </nav>
       <main>{children}</main>
-      <style jsx>{`
+      <style jsx="true">{`
         nav {
           position: fixed;
           height: 60px;
@@ -38,6 +38,6 @@ export default function Index({ children }) {
           margin-top: 62px;
         }
       `}</style>
-    </Fragment>
+    </>
   );
 }
