@@ -1,61 +1,71 @@
 // @flow
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import MainLayout from "@components/MainLayout";
+import Index from "@components/App";
 import { NextPageContext } from "next";
 
-type Props = { post: Array<{id: number, title: string, descriptions: string}> | {} };
+type Props = {
+  post: Array<{ id: number, title: string, descriptions: string }> | {},
+};
 
 export default function Post<Props>({ post: serverPost }) {
-    const [post, setPost] = useState(serverPost);
-    const router = useRouter();
+  const [post, setPost] = useState(serverPost);
+  const router = useRouter();
 
-    useEffect(() => {
-        async function load() {
-            const response = await fetch(`http://localhost:3001/posts/${router.query.id}`);
-            const data = await response.json();
+  useEffect(() => {
+    async function load() {
+      const response = await fetch(
+        `http://localhost:3001/posts/${router.query.id}`
+      );
+      const data = await response.json();
 
-            setPost(data);
-        }
-
-        if (!serverPost) {
-            load()
-        }
-    }, []);
-
-    if (!post) {
-        return <MainLayout><p>Loading...</p></MainLayout>;
+      setPost(data);
     }
 
+    if (!serverPost) {
+      load();
+    }
+  }, []);
+
+  if (!post) {
     return (
-        <MainLayout>
-            <h1>ID: {post.id}</h1>
-            <hr/>
-            <h3>{post.title}</h3>
-            <span>{post.body}</span>
-            <hr/>
-            <br/>
-            <Link href="/posts"><a>Back to all posts</a></Link>
-        </MainLayout>
-    )
+      <Index>
+        <p>Loading...</p>
+      </Index>
+    );
+  }
+
+  return (
+    <Index>
+      <h1>ID: {post.id}</h1>
+      <hr />
+      <h3>{post.title}</h3>
+      <span>{post.body}</span>
+      <hr />
+      <br />
+      <Link href="/posts">
+        <a>Back to all posts</a>
+      </Link>
+    </Index>
+  );
 }
 
 Post.getInitialProps = async ({ query: { id }, req }: NextPageContext) => {
-    if (!req) {
-        return {};
-    }
+  if (!req) {
+    return {};
+  }
 
-    const response = await fetch(`http://localhost:3001/posts/${id}`);
-    const post = await response.json();
+  const response = await fetch(`http://localhost:3001/posts/${id}`);
+  const post = await response.json();
 
-    return { post };
+  return { post };
 };
 
 // import { useState, useEffect } from 'react';
 // import Link from 'next/link';
 // import useFallback from "@hooks/useFallback";
-// import MainLayout from "@components/MainLayout";
+// import Index from "@components/Index";
 //
 // export default function Post({ post: serverPost }) {
 //     const [post, setPost] = useState(serverPost);
@@ -76,11 +86,11 @@ Post.getInitialProps = async ({ query: { id }, req }: NextPageContext) => {
 //     }, []);
 //
 //     if (!post || isFallback) {
-//         return <MainLayout><p>Loading...</p></MainLayout>;
+//         return <Index><p>Loading...</p></Index>;
 //     }
 //
 //     return (
-//         <MainLayout>
+//         <Index>
 //             <h1>ID: {post.id}</h1>
 //             <hr/>
 //             <h3>{post.title}</h3>
@@ -88,7 +98,7 @@ Post.getInitialProps = async ({ query: { id }, req }: NextPageContext) => {
 //             <hr/>
 //             <br/>
 //             <Link href="/posts"><a>Back to all posts</a></Link>
-//         </MainLayout>
+//         </Index>
 //     )
 // }
 //

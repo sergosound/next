@@ -1,4 +1,6 @@
+#suppress inspection "DuplicateKeyInSection" for whole file
 [ignore]
+.*/node_modules/.*
 
 [include]
 
@@ -7,5 +9,12 @@
 [lints]
 
 [options]
+module.name_mapper='^next\/\(.*\)$' -> '<PROJECT_ROOT>/node_modules\1'
+module.name_mapper='^@hooks\/\(.*\)$' -> '<PROJECT_ROOT>/client/hooks\1'
+module.name_mapper='^@components\/\(.*\)$' -> '<PROJECT_ROOT>/client/components\1'
+# come to a single regex pattern
+module.name_mapper='@next' -> '<PROJECT_ROOT>/node_modules/next'
+module.name_mapper='@hooks' -> '<PROJECT_ROOT>/client/hooks'
+module.name_mapper='@components' -> '<PROJECT_ROOT>/client/components'
 
 [strict]

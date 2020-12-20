@@ -1,8 +1,9 @@
+import { Fragment } from "react";
 import Link from "next/link";
 
-export default function App({ children }) {
+export default function Index({ children }) {
   return (
-    <>
+    <Fragment>
       <nav>
         <Link href="/">
           <a>Home</a>
@@ -37,6 +38,6 @@ export default function App({ children }) {
           margin-top: 62px;
         }
       `}</style>
-    </>
+    </Fragment>
   );
 }

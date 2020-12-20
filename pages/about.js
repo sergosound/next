@@ -1,5 +1,9 @@
-import MainLayout from "../client/components/MainLayout";
+import Index from "@components/App";
 
 export default function About() {
-    return <MainLayout><h1>About Page</h1></MainLayout>;
+  return (
+    <Index>
+      <h1>About Page</h1>
+    </Index>
+  );
 }
