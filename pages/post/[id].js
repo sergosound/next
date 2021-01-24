@@ -1,15 +1,19 @@
 // @flow
+import type {Node} from 'react'
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Index from "@components/App";
-import { NextPageContext } from "next";
+import { NextPage, NextPageContext } from "next";
 
+type PostType = { id: number, title: string, body: string };
 type Props = {
-  post: Array<{ id: number, title: string, descriptions: string }> | {},
+    post: PostType,
+    serverPost: PostType,
 };
 
-export default function Post<Props>({ post: serverPost }) {
+// $FlowFixMe
+const Post: NextPage<Props> = ({ post: serverPost }): Node => {
   const [post, setPost] = useState(serverPost);
   const router = useRouter();
 
@@ -36,6 +40,8 @@ export default function Post<Props>({ post: serverPost }) {
     );
   }
 
+  console.log('post', post);
+
   return (
     <Index>
       <h1>ID: {post.id}</h1>
@@ -51,6 +57,7 @@ export default function Post<Props>({ post: serverPost }) {
   );
 }
 
+// $FlowFixMe
 Post.getInitialProps = async ({ query: { id }, req }: NextPageContext) => {
   if (!req) {
     return {};
@@ -61,6 +68,8 @@ Post.getInitialProps = async ({ query: { id }, req }: NextPageContext) => {
 
   return { post };
 };
+
+export default Post;
 
 // import { useState, useEffect } from 'react';
 // import Link from 'next/link';

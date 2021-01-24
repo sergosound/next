@@ -1,6 +1,5 @@
 #suppress inspection "DuplicateKeyInSection" for whole file
 [ignore]
-.*/node_modules/.*
 
 [include]
 

@@ -8,6 +8,7 @@ type Props = $Exact<{
   children: Node,
 }>;
 
+// $FlowFixMe
 export default function L<Props>({ href, as, children }) {
   return (
     <Link href={href} as={as}>
