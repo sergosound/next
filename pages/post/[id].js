@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Index from "@components/App";
 import { NextPage, NextPageContext } from "next";
+import { withTranslation } from "@hocs/witI18n";
 
 type PostType = { id: number, title: string, body: string };
 type Props = {
@@ -13,7 +14,7 @@ type Props = {
 };
 
 // $FlowFixMe
-const Post: NextPage<Props> = ({ post: serverPost }): Node => {
+const Post: NextPage<Props> = ({ post: serverPost, t }): Node => {
   const [post, setPost] = useState(serverPost);
   const router = useRouter();
 
@@ -28,19 +29,17 @@ const Post: NextPage<Props> = ({ post: serverPost }): Node => {
     }
 
     if (!serverPost) {
-      load();
+      load().then();
     }
   }, []);
 
   if (!post) {
     return (
       <Index>
-        <p>Loading...</p>
+        <p>{t('loadPage')}</p>
       </Index>
     );
   }
-
-  console.log('post', post);
 
   return (
     <Index>
@@ -59,17 +58,19 @@ const Post: NextPage<Props> = ({ post: serverPost }): Node => {
 
 // $FlowFixMe
 Post.getInitialProps = async ({ query: { id }, req }: NextPageContext) => {
+  const defaultProps = { namespacesRequired: ['index'] };
+
   if (!req) {
-    return {};
+    return { post: null, ...defaultProps };
   }
 
   const response = await fetch(`http://localhost:3001/posts/${id}`);
   const post = await response.json();
 
-  return { post };
+  return { post, ...defaultProps };
 };
 
-export default Post;
+export default withTranslation('index')(Post);
 
 // import { useState, useEffect } from 'react';
 // import Link from 'next/link';

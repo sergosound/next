@@ -14,6 +14,7 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+          <p id="output"></p>
           <NextScript />
         </body>
       </Html>

@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
+import React  from "react";
 import Link from "next/link";
 
-export default function App({ children }) {
+const App = ({ children }) => {
   return (
     <>
       <nav>
@@ -41,3 +41,5 @@ export default function App({ children }) {
     </>
   );
 }
+
+export default App;

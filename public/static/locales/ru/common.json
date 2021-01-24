@@ -1,0 +1,5 @@
+{
+  "loadPage": "Загрузка...",
+  "error-with-status": "Ошибка {{statusCode}} на стороне сервера",
+  "error-without-status": "Ошибка на стороне сервера"
+}

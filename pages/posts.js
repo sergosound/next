@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Index from "@components/App";
+import App from "@components/App";
+import { withTranslation } from "@hocs/witI18n";
 
-export default function Posts({ posts: serverPosts }) {
+const Posts = ({ posts: serverPosts, t }) => {
   const [posts, setPosts] = useState(serverPosts);
 
   useEffect(() => {
@@ -18,21 +19,21 @@ export default function Posts({ posts: serverPosts }) {
     }
 
     if (!serverPosts) {
-      load();
+      load().then();
     }
   }, []);
 
   if (!posts) {
     return (
-      <Index>
+      <App>
         <h1>Posts Page</h1>
-        <p>Loading...</p>
-      </Index>
+        <p>{t('loadPage')}</p>
+      </App>
     );
   }
 
   return (
-    <Index>
+    <App>
       <h1>Posts Page</h1>
       <ul>
         {posts.map((post) => (
@@ -43,17 +44,21 @@ export default function Posts({ posts: serverPosts }) {
           </li>
         ))}
       </ul>
-    </Index>
+    </App>
   );
 }
 
 Posts.getInitialProps = async ({ req }) => {
+  const defaultProps = { namespacesRequired: ['index'] };
+
   if (!req) {
-    return {};
+    return { posts: null, ...defaultProps };
   }
 
   const response = await fetch("http://localhost:3001/posts");
   const posts = await response.json();
 
-  return { posts };
+  return { posts, ...defaultProps };
 };
+
+export default withTranslation('index')(Posts);
